@@ -10,15 +10,13 @@ recognizer.pause_threshold = 0.8
 def listen():
     with sr.Microphone() as source:
 
-        print("🎤 Listening...")
-
-        recognizer.adjust_for_ambient_noise(source, duration=0.2)
+        print("Listening...")
 
         try:
             audio = recognizer.listen(
                 source,
                 timeout=3,
-                phrase_time_limit=3
+                phrase_time_limit=5
             )
 
             text = recognizer.recognize_google(audio)
