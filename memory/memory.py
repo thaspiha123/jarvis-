@@ -1,29 +1,40 @@
-import json
-
-FILE = "memory/user_data.json"
+import os
 
 
-def load_data():
-    with open(FILE, "r") as f:
-        return json.load(f)
-
-
-def save_data(data):
-    with open(FILE, "w") as f:
-        json.dump(data, f, indent=4)
+MEMORY_FILE = os.path.join(
+    os.path.dirname(__file__),
+    "user_name.txt"
+)
 
 
 def get_name():
-    data = load_data()
-    return data["name"]
 
+    if os.path.exists(MEMORY_FILE):
 
-def add_note(note):
-    data = load_data()
-    data["notes"].append(note)
-    save_data(data)
+        with open(
+            MEMORY_FILE,
+            "r",
+            encoding="utf-8"
+        ) as file:
 
+            name = file.read().strip()
 
-def get_notes():
-    data = load_data()
-    return data["notes"]
+            if name:
+                return name
+
+    name = input(
+        "Enter your name: "
+    ).strip()
+
+    if not name:
+        name = "User"
+
+    with open(
+        MEMORY_FILE,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        file.write(name)
+
+    return name

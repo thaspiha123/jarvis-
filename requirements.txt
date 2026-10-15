@@ -3,3 +3,6 @@ SpeechRecognition
 pyaudio
 wikipedia
 requests
+sounddevice
+numpy
+psutil

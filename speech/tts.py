@@ -1,18 +1,25 @@
+
 import pyttsx3
 
 engine = pyttsx3.init()
 
-engine.setProperty("rate", 170)
-
+# Select Microsoft David male voice
 voices = engine.getProperty("voices")
 
-if len(voices) > 1:
-    engine.setProperty("voice", voices[1].id)
+for voice in voices:
+    if "david" in voice.name.lower():
+        engine.setProperty("voice", voice.id)
+        break
+
+engine.setProperty("rate", 175)
+engine.setProperty("volume", 1.0)
 
 
 def speak(text):
-    print("JARVIS:", text)
-
-    engine.stop()
+    print("Jarvis:", text)
     engine.say(text)
     engine.runAndWait()
+
+
+if __name__ == "__main__":
+    speak("Hello! I am Jarvis. How can I help you today?")
